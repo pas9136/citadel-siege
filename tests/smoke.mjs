@@ -8,7 +8,7 @@ const script = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].
 assert.ok(script.length > 1000, 'Game JavaScript must be embedded in index.html');
 new vm.Script(script, { filename: 'index.html' });
 for (const id of ['canvas','menu','startGame','continueGame','joystick','skill0','skill1','skill2','skill3']) {
-  assert.match(html, new RegExp('id=["\\\']' + id + '["\\\']'), 'Missing UI element: ' + id);
+  assert.match(html, new RegExp('id="' + id + '"'), 'Missing UI element: ' + id);
 }
 assert.match(script, /function direction\(\)/, 'Movement handler missing');
 assert.match(script, /moveDestination/, 'Tap-to-move missing');
