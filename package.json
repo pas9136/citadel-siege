@@ -1,0 +1,11 @@
+{
+  "name": "citadel-siege",
+  "version": "2.7.0",
+  "private": true,
+  "scripts": {
+    "test": "node tests/smoke.mjs && node tests/gameplay.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.58.2"
+  }
+}

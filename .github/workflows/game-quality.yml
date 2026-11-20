@@ -17,3 +17,12 @@ jobs:
           node-version: '22'
       - name: Check game
         run: node tests/smoke.mjs
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium webkit
+      - name: Browser gameplay regressions
+        run: node tests/gameplay.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mobile-previews
+          path: test-results/
