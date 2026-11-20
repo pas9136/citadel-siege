@@ -1,6 +1,6 @@
 # v4.0 expansion — continuation record
 
-Status: development stage, NOT a v4.0 release. Production remains v3.0. Do not merge until the requested expansion systems and integration tests are complete. Version labels intentionally remain 3.0 until release qualification.
+Status: v4.0 release candidate. Recovered equipment checkpoint `fb653f4093d3bfcd7c66255fbeb8f7860fb47f30`; all expansion systems below are implemented. Merge only after the final full suite and GitHub Actions pass.
 
 ## Recovery checkpoint
 
@@ -29,13 +29,21 @@ PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=1 LD_LIBRARY_PATH=/tmp/citadel-libs/r
 
 CI uses the existing standard Playwright installation. No physical iPhone testing.
 
-## Next implementation stages (not implemented)
+## Completed expansion systems
 
-1. Allied army: bounded persistent roster and recruit/upgrade UI, collision-safe rally positions, cached pursuit paths, melee/ranged/magic/healing behavior. Add deterministic combat, path and save tests before committing.
-2. Construction: persistent structures and resource economy, validated placement preventing blocked corridors/spawns, navigation-cache invalidation, tower specializations, barricades, repair and render integration. Test reachability after every placement/removal and loading.
-3. Boss/enemy mechanics: telegraphed attacks, phases, ranged/armored elite behaviors, boss loot integration and wave pacing. Verify dodging, no unavoidable early damage spikes and wave completion.
-4. Class-specific specialization, active skill upgrades, permanent rewards and long-term progression balance. Keep base stats distinct from derived bonuses.
-5. Mobile army/construction/progression UI, expanded art/animations and landscape equipment tests. Add long-running simulation/performance coverage and broader corrupted-save fixtures.
-6. Integrate all save fields and migration, run full Chromium/WebKit and v3.0 save fixtures, update version to 4.0 only after completion, push and wait for development/PR Actions, then merge and verify Pages commit/hash/version/live save continuation.
+- Allied army: eight persistent roster slots, guard/archer/mage/healer, five ranks, paid revival, collision-aware movement with one-second cached pursuit paths. Allies attack and can be attacked; healers restore living allies and the hero.
+- Construction: four named safe pads, ballista and slowing frost towers, damage-intercepting barricades, five upgrade ranks, repair and removal. Gold and wood economy; wood from waves and supply caches. Structures deliberately do not add impassable geometry, preserving all existing corridors and spawn routes.
+- Bosses: boss and overlord ground attacks lock their target before a 1.3-second visible warning; half-health phase shortens recovery. Warnings remain visible with reduced effects. Armored guardians reduce incoming damage; shamans fire dodgeable aimed bolts at nearby heroes. Existing boss loot and wave pacing retained.
+- Specializations: level-five one-time run choice; Berserker/Pyromancer/Sniper damage, Guardian defense, Enchanter cooldown reduction, Tracker speed. Four active skills each accept three talent-point upgrades. Damage/buff strength and cooldowns scale without modifying base stats.
+- Legacy: one permanent point per newly achieved wave, with a persisted high-water mark preventing repeated rewards on replay. Ten attack and ten defense ranks; escalating prices. Separate storage survives defeat/new runs; run equipment/army/construction reset.
+- Mobile: scrollable command center in inventory, jump link, 44px command buttons, portrait/landscape interaction checks. Visible units, structures and boss warning animations.
+- Performance: bounded units/structures/projectiles/effects, cached pursuit and assault paths, cached legacy stat inputs, per-frame projectile target map. Saves omit navigation routes and transient clocks.
+- Save schema 5 uses the existing key; missing expansion fields initialize defaults. Roster/building kinds, limits, ranks, HP, pad uniqueness and numeric fields are sanitized. Schema 3/4 equipment and base-stat compatibility retained.
 
-Deferred requested features are not represented by placeholder menus. There is no production release authorization milestone until these systems are working and all critical tests pass.
+## Release validation
+
+`npm test` runs static checks plus Chromium and WebKit at five viewports each, 128 enemy navigation routes per browser, equipment regressions, expansion combat/save/migration/corrupt-data tests, real portrait/landscape command buttons, and a 120-second deterministic stress simulation per browser. Also exercises actual RAF, sound persistence and save/continue. Physical-device performance is not claimed.
+
+Local WebKit launcher must preserve `LD_LIBRARY_PATH` when using extracted libraries (the bundled wrapper otherwise overwrites it). CI installs normal system dependencies with Playwright.
+
+Final local qualification (2026-11-20): full `npm test` exited 0 with ten browser/viewport combinations, 256 navigation routes, equipment and expansion suites. 120 simulated seconds: Chromium 419 ms; WebKit 932 ms (simulation CPU time, not device FPS). `git diff --check` passed. Mobile command panel visually inspected at 390×844. Remote CI and Pages verification are required after pushing this commit.

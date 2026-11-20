@@ -1,6 +1,6 @@
 {
   "name": "citadel-siege",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "private": true,
   "scripts": {
     "test": "node tests/smoke.mjs && node tests/gameplay.mjs"

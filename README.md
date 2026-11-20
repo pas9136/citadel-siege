@@ -44,3 +44,12 @@ Browser emulation does not replace performance and touch testing on a physical i
 Brass/slate menu styling, fortress banners and stone bevels, quiet hit outlines instead of full-body flashes, terrain-backed minimap with distinct boss markers, larger boss bars, saved optional audio and a persistent best-wave chronicle. Existing classes, talents, shop, inventory, fortress upgrades, routes and save schema remain available.
 
 Scope limits: this is not the complete proposed overhaul. New equipment slots/rarities, friendly guard armies, new boss attack patterns, expanded class trees and extensive endless-balance redesign are deferred. No physical iPhone testing.
+
+
+## Version 4.0 — armies and fortress expansion
+
+Open 🎒 **Inventory and command** to recruit up to eight guards, archers, mages and healers; upgrade or revive them; build ballistae, frost towers or barricades on four safe pads; and repair or remove structures. Gold pays for recruitment and construction; cleared waves and captured supply depots supply wood. Barricades intercept nearby attacks without blocking routes.
+
+At level five, choose an attack or class-specific defense/control specialization. Spend talent points on three ranks for each active skill. Newly achieved waves grant permanent legacy points for attack and defense bonuses, retained after defeat and new runs. Bosses now telegraph ground attacks and accelerate them below half health. Existing six-slot equipment, loot and all previous features remain.
+
+Schema 5 retains the existing save key, migrates older saves and preserves base stats without stacking derived bonuses. Army and buildings persist on continue but reset on a new run; legacy is stored independently. Full automated coverage includes both browser engines, ten viewport combinations, 256 navigation routes, expansion and equipment regressions, old/corrupt saves, mobile command actions and 120-second simulations. No physical-device testing has been performed.
