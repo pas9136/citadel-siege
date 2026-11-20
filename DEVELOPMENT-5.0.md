@@ -149,3 +149,28 @@ These are callback delivery measurements, not physical display presentation or
 input-to-photon latency. They improve on the checkpoint but do not establish
 smooth iPhone gameplay. Further decorative polish is deferred to 5.1; it is not
 the reason for withholding this release.
+
+### Final local validation of `88da7a0`
+
+- `npm test`: PASS, all 10 browser/viewport combinations; navigation (128 routes
+  per engine), equipment, saves/migrations/corrupt recovery, allied armies,
+  construction, bosses, legacy progression and input regression checks. The
+  deterministic 120-second simulations took 377 ms / 498 ms (Chromium / WebKit);
+  these numbers are throughput, not FPS.
+- `npm run test:visual`: PASS, 12 cases / 42 image comparisons. The original 18
+  comparisons retain their existing baselines. The 24 new references cover the
+  expanded release states. Reviewed representative combat, settings, shop and
+  talent screenshots. A detected 4px default control-spacing regression was
+  corrected rather than replacing the original baselines.
+- `npm run test:adaptive`: PASS in Chromium and WebKit.
+- `npm run test:render`: PASS, eight browser/DPR cases (1, 1.5, 2, 3), on this
+  continuation before the final CSS-only spacing correction.
+- `git diff --check`: PASS.
+- Remote checks for the final code commit:
+  https://github.com/pas9136/citadel-siege/actions/runs/44762639628
+- Production HTTP 200 still identifies **4.0** at
+  https://pas9136.github.io/citadel-siege/ . `main` remains
+  `58fba72b3caefc18e17222b8b40f0efb5ebb67b2`; no merge or Pages deployment was made.
+
+Implementation commits: `6785870` (adaptive graphics, presentation, tests and
+measurements), `88da7a0` (preserve compact spacing with zero safe-area insets).
