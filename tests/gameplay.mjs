@@ -30,7 +30,8 @@ try {
     if(height>width)assert.ok(initial.v.y<initial.controls-25,'hero above touch controls');
     assert.equal(initial.canvas,width*2,'Retina backing store capped at 2x');
     // Input and rendering use inverse transforms at all mobile zoom levels.
-    const point={x:initial.v.x+60,y:initial.v.y};
+    // Native WebKit touch events use integer CSS pixels.
+    const point={x:Math.round(initial.v.x+60),y:Math.round(initial.v.y)};
     await page.touchscreen.tap(point.x,point.y);
     const travel=await page.evaluate(point=>{
      const t=window.__citadelTest,w=t.screenToWorld(point.x,point.y),dest={...t.destination()};
