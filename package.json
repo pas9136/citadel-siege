@@ -3,7 +3,8 @@
   "version": "4.0.0",
   "private": true,
   "scripts": {
-    "test": "node tests/smoke.mjs && node tests/gameplay.mjs"
+    "test": "node tests/smoke.mjs && node tests/gameplay.mjs",
+    "test:visual": "playwright test"
   },
   "devDependencies": {
     "playwright": "1.58.2"
