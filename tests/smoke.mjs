@@ -15,5 +15,5 @@ assert.match(script, /moveDestination/, 'Tap-to-move missing');
 assert.match(script, /function createGame\(/, 'Game start missing');
 assert.match(html, /CITADEL SIEGE\s*[·-]\s*ВЕРСИЯ\s*\d+\.\d+/i, 'Visible version missing');
 
-assert.match(html, /CITADEL SIEGE · ВЕРСИЯ 2\.7/, 'Start screen must show version 2.7');
-console.log('PASS: JavaScript syntax, game controls, start screen, version 2.7');
+assert.match(html, /CITADEL SIEGE · ВЕРСИЯ 2\.8/, 'Start screen must show version 2.8');
+console.log('PASS: JavaScript syntax, game controls, start screen, version 2.8');

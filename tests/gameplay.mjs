@@ -1,5 +1,6 @@
 // Real-browser regressions. RAF is advanced explicitly, so results do not depend on CPU speed.
 import assert from 'node:assert/strict';
+import { navigationChecks } from './navigation.mjs';
 import { createServer } from 'node:http';
 import { readFile, mkdir } from 'node:fs/promises';
 import { createRequire } from 'node:module';
@@ -19,7 +20,7 @@ try {
     const errors=[];page.on('pageerror',e=>errors.push(e.message));
     await page.addInitScript(() => { window.__nativeRAF=window.requestAnimationFrame;window.requestAnimationFrame=()=>1; });
     await page.goto(url);
-    assert.match(await page.title(),/v2\.7/);
+    assert.match(await page.title(),/v2\.8/);
     await page.locator('#startGame').tap();
     const initial=await page.evaluate(()=>{
      const t=window.__citadelTest,p=t.state().p,v=t.view();t.frame();
@@ -92,6 +93,7 @@ try {
     checks++;console.log(`PASS: ${engine} ${width}x${height} — controls, camera, zoom, overlays, respawn, saves`);
     await page.close();
    }
+   const nav=await browser.newPage();await nav.addInitScript(()=>window.requestAnimationFrame=()=>1);await nav.goto(url);await navigationChecks(nav);await nav.close();
    // Run the actual animation loop as well as deterministic simulation checks.
    const live=await browser.newPage({viewport:{width:390,height:844},hasTouch:true});
    const liveErrors=[];live.on('pageerror',e=>liveErrors.push(e.message));await live.goto(url);
