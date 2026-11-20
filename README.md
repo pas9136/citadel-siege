@@ -1,4 +1,4 @@
-# CITADEL SIEGE · 2.8
+# CITADEL SIEGE · 3.0
 
 Original mobile HTML5 Action RPG / fortress defense game. Open `index.html` in a modern browser; the game needs no build, external assets, or runtime dependencies. Progress is saved locally in the browser.
 
@@ -38,3 +38,9 @@ Browser tests cover five viewport sizes (320×568, 390×844, 430×932, 844×390 
 - Fixed stale destinations across runs and respawns, conflicting overlays, and abilities/potions/waves firing behind overlays. Old toast messages no longer carry over into new runs.
 
 Browser emulation does not replace performance and touch testing on a physical iPhone/Safari. Existing save keys are retained; no migration is needed.
+
+## Version 3.0 — focused presentation release
+
+Brass/slate menu styling, fortress banners and stone bevels, quiet hit outlines instead of full-body flashes, terrain-backed minimap with distinct boss markers, larger boss bars, saved optional audio and a persistent best-wave chronicle. Existing classes, talents, shop, inventory, fortress upgrades, routes and save schema remain available.
+
+Scope limits: this is not the complete proposed overhaul. New equipment slots/rarities, friendly guard armies, new boss attack patterns, expanded class trees and extensive endless-balance redesign are deferred. No physical iPhone testing.
