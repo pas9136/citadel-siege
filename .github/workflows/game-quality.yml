@@ -21,6 +21,8 @@ jobs:
       - run: npx playwright install --with-deps chromium webkit
       - name: Browser gameplay regressions
         run: node tests/gameplay.mjs
+      - name: Renderer cache and device scale regressions
+        run: npm run test:render
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -44,3 +44,40 @@ PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=1 LD_LIBRARY_PATH=/tmp/citadel-libs/r
 5. Extend screenshot fixtures to every hero, spells, bosses, dead units, damaged buildings, talent/shop/settings panels, safe-area insets and portrait rotation. Pin the font/browser CI environment before enabling image comparison there.
 6. Profile real iPhone Safari during large waves; resolve GPU/thermal/memory regressions and verify simultaneous joystick/skills on hardware. Cached drawing alone does not prove smooth device performance.
 7. Only after all above pass: update title/menu/package/tests to 5.0; run full local and remote CI, merge development into main, deploy GitHub Pages, then verify the production version and browser smoke flow.
+
+## Resumed optimization checkpoint (2026-11-20)
+
+This continuation is also **not a release**. Passing a subset of the release gates is insufficient for merging to main or deploying Pages. Keep the version at 4.0 until the remaining work above is finished.
+
+Implemented:
+- Cache the viewport background gradient and a dedicated 2x minimap texture; avoid resampling the full 1840×1840 terrain for the minimap on every frame.
+- Retain sprite-frame references in render-only WeakMap poses. Remove redundant enemy save/restore transforms and allocating defender filters during drawing.
+- Cache projectile glow textures and short-lived combat text textures instead of applying blur on every frame. Cull offscreen friendly projectiles. Floater textures are weakly held and collectible.
+- Avoid reallocating the canvas backing store on unchanged resize events; retain the 2x DPR ceiling.
+- Pre-rasterize four finite poses per unit/team (idle, two strides, attack/cast), interpolate facing with simulation time, and trigger attack poses from actual combat actions. Reduced-effects mode suppresses gait and attack poses. Add guardian shoulder armor and an overlord crown. These remain a foundation: complete directional/death/boss-specific animation sets are still outstanding.
+- Add `npm run test:render` for both engines at DPR 1, 1.5, 2 and 3: 240 units, no new steady-state canvases/linear gradients, state isolation, unchanged-size resize preservation, and portrait rotation. Include it in the development Actions workflow.
+- Extend `npm run benchmark:render` to compare v4, `a92ad1b`, and the working tree. `PACED=1` measures RAF intervals as well as submission time; `COMBAT=1` advances combat with 240 high-health enemies. Fixed random seed makes subsequent runs reproducible. These are host diagnostics, not physical iPhone FPS claims.
+
+Release blockers remain: complete environment furnishing/lighting; full directional, death and distinct boss animations; class-specific ability art and effects; complete inventory/equipment/talent/recruitment/construction/shop/settings/boss UI; upgrade and loot feedback; expanded visual fixtures for those states and safe areas; a pinned visual CI environment; physical iPhone Safari/GPU/thermal/memory and simultaneous-input qualification. Then update all version labels, run final local/remote checks, merge, deploy and verify production. The existing seven-item release list above remains authoritative; none is marked complete by this optimization checkpoint.
+
+Validation of the resumed code:
+- Full `npm test`: PASS, all 10 browser/viewport combinations, both engines' navigation/equipment/expansion checks, legacy save migrations and corrupted-save recovery, and real RAF checks. The 120-second deterministic stress simulation completed in 545 ms (Chromium) / 1034 ms (WebKit); this is simulation throughput, not gameplay FPS.
+- Visual suite: PASS, 6 cases / 18 comparisons at 667×375, 844×390 and 932×430 in both engines. Existing baselines remain unchanged (all differences within the existing 0.1% tolerance). A fresh 844×390 battlefield was also inspected for the guardian and overlord changes.
+- Renderer cache/DPR checks: PASS, 8 cases, with every enemy kind represented among 240 actors. A missing variant cache entry found during development was fixed before the final rerun.
+- `git diff --check`: PASS.
+- Local WebKit again required extracted Debian libraries and preserving `LD_LIBRARY_PATH` in both the GTK and WPE MiniBrowser wrappers. These environment changes are not committed.
+- Pre-rasterized unit poses use about 7.8 MiB of RGBA pixels (80 × 160 × 160 × 4 bytes), excluding browser overhead; this trades bounded memory for avoiding procedural drawing in combat. Physical-device memory/thermal qualification remains outstanding.
+- Production HTTP 200 still identifies version **4.0**. No release merge or deployment was performed.
+
+Final seeded heavy-combat benchmark (`PACED=1 COMBAT=1 npm run benchmark:render`), 240 enemies, 844×390/DPR 2, 180 samples (3 simulated seconds). Raw results: `tests/benchmarks/2026-11-20-combat.json`. CPU values include update and draw; RAF intervals also include browser scheduling/rasterization.
+
+| Engine | Revision | CPU median/p95 ms | RAF interval median/p95 ms |
+|---|---|---:|---:|
+| chromium | v4 | 2.1/5.5 | 26.4/51.2 |
+| chromium | checkpoint | 3.5/8.0 | 35.8/89.6 |
+| chromium | development | 2.0/5.7 | 33.8/53.5 |
+| webkit | v4 | 7.0/23.0 | 124.0/245.0 |
+| webkit | checkpoint | 7.0/32.0 | 101.0/139.0 |
+| webkit | development | 7.0/13.0 | 100.0/144.0 |
+
+Performance is **not approved for release**: CPU improvements do not establish smooth frame delivery on this host, and no physical iPhone was available. Full UI/effects/environment and device qualification work could not be completed in this continuation; preserve this tested development checkpoint rather than labeling it 5.0.

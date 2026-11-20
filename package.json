@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "test": "node tests/smoke.mjs && node tests/gameplay.mjs",
-    "test:visual": "playwright test"
+    "test:visual": "playwright test",
+    "test:render": "node tests/render-cache.mjs",
+    "benchmark:render": "node tests/render-performance.mjs"
   },
   "devDependencies": {
     "playwright": "1.58.2"

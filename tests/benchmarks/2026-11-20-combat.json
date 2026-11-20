@@ -1,0 +1,81 @@
+{
+  "sourceBlob": "fa04be0bc29b9af4b4d515aaa94de054d591949e",
+  "environment": "Debian 13 shared headless host, Playwright 1.58.2; not physical iPhone",
+  "viewport": [
+    844,
+    390
+  ],
+  "deviceScaleFactor": 2,
+  "warmupFrames": 20,
+  "samples": 180,
+  "simulationSeconds": 3,
+  "description": "240 high-health enemies; paced RAF; update plus draw CPU timing and frame intervals. Not thermal or sustained-device qualification.",
+  "results": [
+    {
+      "engine": "chromium",
+      "revision": "v4",
+      "paced": true,
+      "combat": true,
+      "intervalMedianMs": 26.400000000023283,
+      "intervalP95Ms": 51.199999999953434,
+      "enemies": 240,
+      "medianMs": 2.099999999976717,
+      "p95Ms": 5.5
+    },
+    {
+      "engine": "chromium",
+      "revision": "checkpoint",
+      "paced": true,
+      "combat": true,
+      "intervalMedianMs": 35.800000000046566,
+      "intervalP95Ms": 89.60000000009313,
+      "enemies": 240,
+      "medianMs": 3.5,
+      "p95Ms": 8
+    },
+    {
+      "engine": "chromium",
+      "revision": "development",
+      "paced": true,
+      "combat": true,
+      "intervalMedianMs": 33.79999999993015,
+      "intervalP95Ms": 53.5,
+      "enemies": 240,
+      "medianMs": 2,
+      "p95Ms": 5.700000000069849
+    },
+    {
+      "engine": "webkit",
+      "revision": "v4",
+      "paced": true,
+      "combat": true,
+      "intervalMedianMs": 124,
+      "intervalP95Ms": 245,
+      "enemies": 240,
+      "medianMs": 6.999999999996362,
+      "p95Ms": 23.000000000003638
+    },
+    {
+      "engine": "webkit",
+      "revision": "checkpoint",
+      "paced": true,
+      "combat": true,
+      "intervalMedianMs": 101,
+      "intervalP95Ms": 139,
+      "enemies": 240,
+      "medianMs": 7.0000000000009095,
+      "p95Ms": 32
+    },
+    {
+      "engine": "webkit",
+      "revision": "development",
+      "paced": true,
+      "combat": true,
+      "intervalMedianMs": 100,
+      "intervalP95Ms": 144,
+      "enemies": 240,
+      "medianMs": 7,
+      "p95Ms": 13
+    }
+  ]
+}
