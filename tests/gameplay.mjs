@@ -20,7 +20,7 @@ try {
     const errors=[];page.on('pageerror',e=>errors.push(e.message));
     await page.addInitScript(() => { window.__nativeRAF=window.requestAnimationFrame;window.requestAnimationFrame=()=>1; });
     await page.goto(url);
-    assert.match(await page.title(),/v2\.8/);
+    assert.match(await page.title(),/v3\.0/);
     await page.locator('#startGame').tap();
     const initial=await page.evaluate(()=>{
      const t=window.__citadelTest,p=t.state().p,v=t.view();t.frame();
@@ -94,6 +94,7 @@ try {
     await page.close();
    }
    const nav=await browser.newPage();await nav.addInitScript(()=>window.requestAnimationFrame=()=>1);await nav.goto(url);await navigationChecks(nav);await nav.close();
+   const settings=await browser.newPage();await settings.goto(url);await settings.locator('#startGame').click();await settings.locator('#pauseButton').click();await settings.locator('#soundToggle').check();await settings.reload();assert.equal(await settings.evaluate(()=>localStorage.getItem('citadel.sound')),'true');assert.ok(await settings.locator('#legacyGoals').textContent());await settings.close();
    // Run the actual animation loop as well as deterministic simulation checks.
    const live=await browser.newPage({viewport:{width:390,height:844},hasTouch:true});
    const liveErrors=[];live.on('pageerror',e=>liveErrors.push(e.message));await live.goto(url);
