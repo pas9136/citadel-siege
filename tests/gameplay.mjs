@@ -1,5 +1,6 @@
 // Real-browser regressions. RAF is advanced explicitly, so results do not depend on CPU speed.
 import assert from 'node:assert/strict';
+import { equipmentChecks } from './equipment.mjs';
 import { navigationChecks } from './navigation.mjs';
 import { createServer } from 'node:http';
 import { readFile, mkdir } from 'node:fs/promises';
@@ -93,7 +94,7 @@ try {
     checks++;console.log(`PASS: ${engine} ${width}x${height} — controls, camera, zoom, overlays, respawn, saves`);
     await page.close();
    }
-   const nav=await browser.newPage();await nav.addInitScript(()=>window.requestAnimationFrame=()=>1);await nav.goto(url);await navigationChecks(nav);await nav.close();
+   const nav=await browser.newPage();await nav.addInitScript(()=>window.requestAnimationFrame=()=>1);await nav.goto(url);await navigationChecks(nav);await equipmentChecks(nav);await nav.close();
    const settings=await browser.newPage();await settings.goto(url);await settings.locator('#startGame').click();await settings.locator('#pauseButton').click();await settings.locator('#soundToggle').check();await settings.reload();assert.equal(await settings.evaluate(()=>localStorage.getItem('citadel.sound')),'true');assert.ok(await settings.locator('#legacyGoals').textContent());await settings.close();
    // Run the actual animation loop as well as deterministic simulation checks.
    const live=await browser.newPage({viewport:{width:390,height:844},hasTouch:true});
