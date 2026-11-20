@@ -81,3 +81,71 @@ Final seeded heavy-combat benchmark (`PACED=1 COMBAT=1 npm run benchmark:render`
 | webkit | development | 7.0/13.0 | 100.0/144.0 |
 
 Performance is **not approved for release**: CPU improvements do not establish smooth frame delivery on this host, and no physical iPhone was available. Full UI/effects/environment and device qualification work could not be completed in this continuation; preserve this tested development checkpoint rather than labeling it 5.0.
+
+## Frame-delivery and release continuation (2026-11-20)
+
+Resumed from `1e58bae` without resetting existing work. The user's release scope
+now separates essential stability/readability from optional art: see
+[BACKLOG-5.1.md](BACKLOG-5.1.md). The earlier all-art-must-be-complete gate is
+superseded by that scoped backlog. Version labels intentionally remain 4.0 until
+performance qualification succeeds.
+
+Implemented in this continuation:
+- Automatic render-only quality driven by actual RAF intervals: two-second p90
+  windows step canvas backing scale 2 → 1.5 → 1; twelve healthy seconds are needed
+  before recovery. Paused/hidden/menu/modal periods and suspension-sized gaps do
+  not influence adaptation. CSS controls retain their display resolution.
+- Bounded decorative effects and damage text at low quality. Combat simulation,
+  enemy population, damage, boss telegraphs, targeting and saves are unchanged.
+- Original class-specific SVG ability icons for all twelve abilities, preserving
+  text labels and accessible names; short cached enemy fall/fade animations.
+- Fixed clipped pause settings and action buttons in landscape: scrollable help,
+  fixed action area. Added left/right safe-area insets to controls and overlays.
+- Expanded visual fixtures for each hero's combat, death, boss warning, destroyed
+  building, talents, shop and settings. Added synthetic safe-area and rotation
+  assertions, and visibility checks for pause actions and settings.
+- Added `test:adaptive` in local scripts and gameplay CI; added `benchmark:frames`
+  using the real production RAF loop, with eight seconds of warmup and fifteen
+  seconds of measurement. `ADAPTIVE=1 PACED=1 COMBAT=1 npm run benchmark:render`
+  compares v4, the art checkpoint and development after 240 warmup frames and
+  180 measured frames. Warmup now advances combat; do not compare directly with
+  the old three-second checkpoint numbers above.
+
+No physical iPhone was tested. WebKit here is Playwright's Linux WebKit, not iOS
+Safari. GPU/thermal/memory behavior and real simultaneous touch remain unverified.
+Visual baselines remain local Debian 13 / Playwright 1.58.2 references; portable
+visual CI image/font pinning is still outstanding. Gameplay and adaptive checks
+run in the existing GitHub Actions workflow.
+
+### Measured release blocker
+
+**DO NOT MERGE OR DEPLOY this continuation as 5.0.** The real production RAF loop
+still delivers uneven WebKit frames at minimum graphics quality. Resolve or
+qualify this on representative Safari hardware before release; low CPU submission
+time cannot clear this blocker. No hardware evidence is available to distinguish
+all Linux host limitations from target-device behavior.
+
+Measured on this host with 240 high-health enemies, 844×390, device scale 2:
+
+| Engine / revision | CPU median / p95 ms | Paced RAF median / p95 ms | Final backing scale |
+|---|---:|---:|---:|
+| Chromium v4 | 1.1 / 2.0 | 17.7 / 21.6 | 2 |
+| Chromium art checkpoint | 1.7 / 3.7 | 25.3 / 28.9 | 2 |
+| Chromium development | 1.4 / 2.4 | 17.6 / 20.3 | 1.5 |
+| WebKit v4 | 3 / 7 | 95 / 121 | 2 |
+| WebKit art checkpoint | 3 / 8 | 69 / 92 | 2 |
+| WebKit development | 3 / 7 | 48 / 73 | 1 |
+
+Separate production-loop measurement (no manual simulation or drawing, 8-second
+warmup + 15-second sample):
+
+| Engine | RAF median / p95 ms | Frames >33.4 ms | Final backing scale |
+|---|---:|---:|---:|
+| Chromium | 16.7 / 16.8 | 0.34% | 1 |
+| WebKit | 52 / 76 | 91.32% | 1 |
+
+Raw data: [tests/benchmarks/2026-11-20-adaptive.json](tests/benchmarks/2026-11-20-adaptive.json).
+These are callback delivery measurements, not physical display presentation or
+input-to-photon latency. They improve on the checkpoint but do not establish
+smooth iPhone gameplay. Further decorative polish is deferred to 5.1; it is not
+the reason for withholding this release.

@@ -23,6 +23,8 @@ jobs:
         run: node tests/gameplay.mjs
       - name: Renderer cache and device scale regressions
         run: npm run test:render
+      - name: Adaptive graphics regressions
+        run: npm run test:adaptive
       - uses: actions/upload-artifact@v4
         if: always()
         with:
