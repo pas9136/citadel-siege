@@ -1,0 +1,47 @@
+name: Publish isolated RC1 preview
+on:
+  push:
+    branches: [preview/5.0-rc.1]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium webkit
+      - name: Verify exact RC1 source
+        run: git diff --exit-code bc5d6d3232a854868cca6a8cc756d155cbd001ca -- index.html package.json package-lock.json
+      - run: npm test
+      - run: npm run test:render
+      - run: npm run test:adaptive
+      - run: node scripts/build-preview.mjs
+      - name: Test final deployment and save isolation in both engines
+        run: node tests/preview.mjs
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}preview/
+    steps:
+      - name: Deploy production v4 plus isolated RC1
+        id: deployment
+        uses: actions/deploy-pages@v4
