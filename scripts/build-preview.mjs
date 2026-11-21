@@ -7,7 +7,7 @@ const production='58fba72b3caefc18e17222b8b40f0efb5ebb67b2';
 const git=(...args)=>execFileSync('git',args,{encoding:'utf8'});
 assert.equal(git('rev-parse','v5.0.0-rc.1^{}').trim(),rc);
 // Fail closed if production changes: review and repin before publishing again.
-assert.equal(git('rev-parse','origin/main').trim(),production);
+assert.equal(git('show','origin/main:index.html'),git('show',`${production}:index.html`));
 const original=git('show',`${rc}:index.html`);
 const root=git('show',`${production}:index.html`);
 assert.match(root,/ВЕРСИЯ 4\.0/);

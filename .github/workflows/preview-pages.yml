@@ -1,4 +1,4 @@
-name: Publish isolated RC1 preview
+name: Verify isolated RC1 preview
 on:
   push:
     branches: [preview/5.0-rc.1]
@@ -29,19 +29,7 @@ jobs:
       - run: node scripts/build-preview.mjs
       - name: Test final deployment and save isolation in both engines
         run: node tests/preview.mjs
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
+          name: verified-pages-site
           path: _site
-  deploy:
-    needs: build
-    runs-on: ubuntu-24.04
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}preview/
-    steps:
-      - name: Deploy production v4 plus isolated RC1
-        id: deployment
-        uses: actions/deploy-pages@v4
