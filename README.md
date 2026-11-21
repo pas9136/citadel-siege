@@ -1,6 +1,8 @@
-# CITADEL SIEGE · 3.0
+# CITADEL SIEGE · 5.0 RC1
 
 Original mobile HTML5 Action RPG / fortress defense game. Open `index.html` in a modern browser; the game needs no build, external assets, or runtime dependencies. Progress is saved locally in the browser.
+
+This is a release candidate for physical iPhone testing, not a production release. See [RELEASE-CANDIDATE-5.0.md](RELEASE-CANDIDATE-5.0.md) for setup and acceptance checks.
 
 ## Development
 

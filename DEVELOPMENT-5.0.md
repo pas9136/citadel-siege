@@ -1,5 +1,7 @@
 # CITADEL SIEGE 5.0 — development checkpoint
 
+**2026-11-21 status:** [5.0 RC1](RELEASE-CANDIDATE-5.0.md) is prepared for physical-device testing at the user’s request. Historical instructions below to retain the 4.0 label are superseded for the RC only. The production merge/deploy gate remains. Prior results and benchmarks are preserved below.
+
 This is **not the 5.0 release**. Production and the version label remain 4.0. Do not merge or deploy this checkpoint as a completed overhaul.
 
 ## Recovery and completed work

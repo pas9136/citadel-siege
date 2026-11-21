@@ -1,0 +1,49 @@
+CITADEL SIEGE 5.0 RC1 — fresh validation, 2026-11-21
+Source: recovered development 7fd28a2 + RC labels/version assertions; no gameplay changes.
+Commands: npm test (Chromium); BROWSERS=webkit node tests/gameplay.mjs; npm run test:render; npm run test:adaptive; npm run test:visual
+WebKit used extracted Linux libraries and PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=1.
+
+PASS: JavaScript syntax, game controls, start screen, version 5.0 RC1
+PASS: chromium 320x568 — controls, camera, zoom, overlays, respawn, saves
+PASS: chromium 390x844 — controls, camera, zoom, overlays, respawn, saves
+PASS: chromium 430x932 — controls, camera, zoom, overlays, respawn, saves
+PASS: chromium 844x390 — controls, camera, zoom, overlays, respawn, saves
+PASS: chromium 1280x800 — controls, camera, zoom, overlays, respawn, saves
+PASS: navigation — 128 enemy gate/type routes, fortress rooms, caches, wall sliding, dash, blocked taps, live assaults, cancelled input
+PASS: equipment — six slots, combat stats, recovery, upgrades, sales, boss loot, overflow, sanitization, save migration, UI actions
+PASS: expansion — army, construction, bosses, specialization, legacy, schema 3/5, corrupted saves, mobile UI; 120s stress 437ms
+PASS: webkit 320x568 — controls, camera, zoom, overlays, respawn, saves
+PASS: webkit 390x844 — controls, camera, zoom, overlays, respawn, saves
+PASS: webkit 430x932 — controls, camera, zoom, overlays, respawn, saves
+PASS: webkit 844x390 — controls, camera, zoom, overlays, respawn, saves
+PASS: webkit 1280x800 — controls, camera, zoom, overlays, respawn, saves
+PASS: navigation — 128 enemy gate/type routes, fortress rooms, caches, wall sliding, dash, blocked taps, live assaults, cancelled input
+PASS: equipment — six slots, combat stats, recovery, upgrades, sales, boss loot, overflow, sanitization, save migration, UI actions
+PASS: expansion — army, construction, bosses, specialization, legacy, schema 3/5, corrupted saves, mobile UI; 120s stress 499ms
+PASS: 5 browser/viewport combinations
+PASS: chromium DPR 1: 240 enemies, steady caches, state isolation, resize
+PASS: chromium DPR 1.5: 240 enemies, steady caches, state isolation, resize
+PASS: chromium DPR 2: 240 enemies, steady caches, state isolation, resize
+PASS: chromium DPR 3: 240 enemies, steady caches, state isolation, resize
+PASS: webkit DPR 1: 240 enemies, steady caches, state isolation, resize
+PASS: webkit DPR 1.5: 240 enemies, steady caches, state isolation, resize
+PASS: webkit DPR 2: 240 enemies, steady caches, state isolation, resize
+PASS: webkit DPR 3: 240 enemies, steady caches, state isolation, resize
+PASS: chromium: frame delivery adaptation, hysteresis, pause/stall exclusion, resize, simulation isolation
+PASS: webkit: frame delivery adaptation, hysteresis, pause/stall exclusion, resize, simulation isolation
+  ✓   1 [chromium] › tests/visual/presentation.spec.mjs:5:2 › presentation 667x375 (853ms)
+  ✓   2 [chromium] › tests/visual/presentation.spec.mjs:5:2 › presentation 844x390 (768ms)
+  ✓   3 [chromium] › tests/visual/presentation.spec.mjs:5:2 › presentation 932x430 (821ms)
+  ✓   4 [chromium] › tests/visual/release.spec.mjs:4:46 › release states knight (1.2s)
+  ✓   5 [chromium] › tests/visual/release.spec.mjs:4:46 › release states mage (1.3s)
+  ✓   6 [chromium] › tests/visual/release.spec.mjs:4:46 › release states ranger (1.2s)
+  ✓   7 [webkit] › tests/visual/presentation.spec.mjs:5:2 › presentation 667x375 (2.0s)
+  ✓   8 [webkit] › tests/visual/presentation.spec.mjs:5:2 › presentation 844x390 (2.2s)
+  ✓   9 [webkit] › tests/visual/presentation.spec.mjs:5:2 › presentation 932x430 (2.4s)
+  ✓  10 [webkit] › tests/visual/release.spec.mjs:4:46 › release states knight (3.6s)
+  ✓  11 [webkit] › tests/visual/release.spec.mjs:4:46 › release states mage (3.3s)
+  ✓  12 [webkit] › tests/visual/release.spec.mjs:4:46 › release states ranger (3.3s)
+  12 passed (25.2s)
+
+git diff --check: PASS
+No performance benchmarks rerun. Physical iPhone validation remains pending.

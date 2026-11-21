@@ -22,7 +22,7 @@ try {
     const errors=[];page.on('pageerror',e=>errors.push(e.message));
     await page.addInitScript(() => { window.__nativeRAF=window.requestAnimationFrame;window.requestAnimationFrame=()=>1; });
     await page.goto(url);
-    assert.match(await page.title(),/v4\.0/);
+    assert.match(await page.title(),/v5\.0-rc\.1/);
     await page.locator('#startGame').tap();
     const initial=await page.evaluate(()=>{
      const t=window.__citadelTest,p=t.state().p,v=t.view();t.frame();
