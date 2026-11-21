@@ -1,0 +1,37 @@
+name: Preview Pages checks
+on:
+  push:
+    branches: [main]
+    paths: ['preview/**', 'scripts/build-preview.mjs', 'tests/preview.mjs', '.github/workflows/preview-pages-checks.yml']
+  workflow_run:
+    workflows: ['pages build and deployment']
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  preview:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium webkit
+      - name: Verify pinned sources and published preview files
+        run: |
+          node scripts/build-preview.mjs
+          diff index.html _site/index.html
+          diff -r preview _site/preview
+      - name: Check combined site and save isolation
+        run: node tests/preview.mjs
+      - name: Verify public Pages after deployment
+        if: github.event_name == 'workflow_run'
+        env:
+          PREVIEW_BASE_URL: https://pas9136.github.io/citadel-siege/
+        run: node tests/preview.mjs

@@ -1,0 +1,9 @@
+{
+  "version": "5.0.0-rc.1",
+  "commit": "bc5d6d3232a854868cca6a8cc756d155cbd001ca",
+  "productionCommit": "58fba72b3caefc18e17222b8b40f0efb5ebb67b2",
+  "storagePrefix": "citadel.preview.v5.0.0-rc.1:",
+  "sourceSHA256": "3b0e12a2352d42bf71b858f88fe6dd5ed125a6caf4ffa168f31ed16969a56376",
+  "previewSHA256": "5b8f5b2e1d71955594923fd58647d21f6d7a74a96f148a6b43452e32611a562f",
+  "productionSHA256": "f39d453c54e3fc3259a43fcebc69b7663761b010e8b22fad971f2a3367164824"
+}
