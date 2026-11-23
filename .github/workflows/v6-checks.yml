@@ -1,0 +1,25 @@
+name: Citadel 6 preview checks
+on:
+  push:
+    paths: ['preview-v6/**', 'scripts/build-v6.py', 'tests/v6.mjs', '.github/workflows/v6-checks.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  playable-map:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium webkit
+      - run: python3 scripts/build-v6.py && git diff --exit-code -- preview-v6/index.html
+      - run: python3 -m http.server 8000 &
+      - run: node tests/v6.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v6-landscape-checks
+          path: test-results/
