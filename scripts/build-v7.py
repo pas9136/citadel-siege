@@ -1,0 +1,15 @@
+from pathlib import Path
+p=Path(__file__).resolve().parent.parent
+s=(p/'preview-v6/index.html').read_text()
+s=s.replace('6.0-preview','7.0').replace('6.0 PREVIEW','7.0 — HEROES AT WAR').replace('v6.0:','v7.0:').replace('6.0 ·','7.0 ·')
+s=s.replace('Отбей 4 волны','Отбей 30 волн').replace('Последний рубеж','HEROES AT WAR').replace('<strong>СТРАЖ</strong>','<strong>WARRIOR</strong>').replace('<strong>МАГ</strong>','<strong>MAGE</strong>').replace('<strong>ОХОТНИК</strong>','<strong>RANGER</strong>')
+s=s.replace('schema:6,','schema:7,mana:p.mana,manaPotions:p.manaPotions,')
+s=s.replace('Math.min(4,state.wave)','Math.min(30,state.wave)').replace('state.wave>=4)enterStage','state.wave>=30)enterStage').replace("state.wave+'/4'","state.wave+'/30'").replace('DEFEND 4 WAVES','DEFEND 30 WAVES')
+s=s.replace('i<4;i++)p.cooldowns','i<5;i++)p.cooldowns').replace('i>3||e.skills','i>4||e.skills').replace('skills:[0,0,0,0]','skills:[0,0,0,0,0]')
+s=s.replace("boss.phase=boss.hp<boss.maxHp*.5?2:1;boss.specialClock", "if(boss.major)continue;boss.phase=boss.hp<boss.maxHp*.5?2:1;boss.specialClock")
+s=s.replace("if(e.timer<=0){const ally", "if(e.timer<=0&&e.freeze<=0){const ally")
+s=s.replace("caster=['mage','shaman','healer']", "caster=['mage','shaman','healer','summoner','pyromancer']").replace("archer=['ranger','archer','runner']", "archer=['ranger','archer','runner','siege']")
+s=s.replace("enemy?(caster?'#55405c':'#713e3c')", "enemy?(types[kind]?.color||'#713e3c')")
+s=s.replace("window.__citadelTest={",(p/'preview-7/combat.js').read_text()+"\nwindow.__citadelTest={enterStage,heroDefs,hazards:()=>hazards,useMana, ")
+s=s.replace("const actual=Math", "const actual=Math")
+(p/'preview-7/index.html').write_text(s)

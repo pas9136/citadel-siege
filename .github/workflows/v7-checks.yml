@@ -1,0 +1,26 @@
+name: Heroes at War checks
+on:
+  push:
+    branches: [development-v7.0, main]
+    paths: ['preview-7/**', 'scripts/build-v7.py', 'tests/v7*.mjs', '.github/workflows/v7-checks.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  campaign:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium webkit
+      - run: python3 scripts/build-v7.py && git diff --exit-code -- preview-7/index.html
+      - run: python3 -m http.server 8000 &
+      - run: node tests/v6.mjs && node tests/v7.mjs && node tests/v7-combat.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: heroes-at-war-landscape
+          path: test-results/
