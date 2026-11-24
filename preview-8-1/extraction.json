@@ -1,0 +1,50 @@
+{
+  "war3map.w3e": {
+    "available": true,
+    "bytes": 152848,
+    "sha256": "9cfe222d1587be7c5f1228cdd88679c2cbb2eb65ade120628c61fbd891e1c528"
+  },
+  "war3map.wpm": {
+    "available": true,
+    "bytes": 344080,
+    "sha256": "fac0153ad4a44d0edaed78347fcfd0106010fa4ea99ac117954f7279c99f78b3"
+  },
+  "war3map.doo": {
+    "available": true,
+    "bytes": 41574,
+    "sha256": "c069f31b35f4854d081f8ff0d4899a5ba7a91e09ab8002b4c72988ca7a4fb71d"
+  },
+  "war3mapUnits.doo": {
+    "available": true,
+    "bytes": 111,
+    "sha256": "7f28075db036529a9c6769b7098a96980f44f476f49e4b766b1d5ec92591da2f"
+  },
+  "war3map.w3r": {
+    "available": false
+  },
+  "war3map.w3i": {
+    "available": true,
+    "bytes": 799,
+    "sha256": "d466bab51eb9bd109ad13e8ce541813621373ebfbfcf0a9880e6ee71cc480a20"
+  },
+  "scripts\\war3map.j": {
+    "available": true,
+    "bytes": 749210,
+    "sha256": "4198cfb92b8f5f77f6026978467a1eb16ee47c4299af53a70e8fdd10a825b7a8"
+  },
+  "war3mapMap.blp": {
+    "available": true,
+    "bytes": 9363,
+    "sha256": "67d8adc940c40c612faa26b5d6ac663bdff2ccfd35cea856b243e444bb332e89"
+  },
+  "war3mapPreview.tga": {
+    "available": true,
+    "bytes": 196652,
+    "sha256": "71068b42c1b92d0f9bfff75e56edbd719c63e2e37fcb0268ba732817661ac147"
+  },
+  "war3map.mmp": {
+    "available": true,
+    "bytes": 200,
+    "sha256": "2633f80d2e5f8639acd848bcab04274d1c1a9f5669244b6a67eea8f1c989e7b0"
+  }
+}
