@@ -1,0 +1,21 @@
+name: Origins checks
+on:
+  push:
+    branches: [development-v8.0, main]
+    paths: ['preview-8/**', 'scripts/build-v8.py', 'tests/v8*.mjs', '.github/workflows/v8-checks.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  campaign:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium webkit
+      - run: python3 scripts/build-v8.py && git diff --exit-code -- preview-8/index.html
+      - run: python3 -m http.server 8000 &
+      - run: node tests/v8.mjs && node tests/v8-combat.mjs && node tests/v8-state.mjs
