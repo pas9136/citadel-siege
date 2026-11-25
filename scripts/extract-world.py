@@ -3,6 +3,9 @@ import ctypes as C,sys,struct,json,hashlib,re,base64
 from pathlib import Path
 lib=C.CDLL(sys.argv[2]);h=C.c_void_p()
 assert lib.SFileOpenArchive(sys.argv[1].encode(),0,0,C.byref(h)), 'Cannot open supplied archive'
+for fn in ['SFileOpenArchive','SFileOpenFileEx','SFileReadFile','SFileCloseFile','SFileCloseArchive']:
+ getattr(lib,fn).restype=C.c_bool
+lib.SFileGetFileSize.restype=C.c_uint32
 out=Path('/tmp/citadel-reference');out.mkdir(exist_ok=True)
 members={}
 for name in ['war3map.w3e','war3map.wpm','war3map.doo','war3mapUnits.doo','war3map.w3r','war3map.w3i','scripts\\war3map.j','war3mapMap.blp','war3mapPreview.tga','war3map.mmp']:

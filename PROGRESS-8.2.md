@@ -19,3 +19,11 @@ Original archive is absent locally. 8.1 spatial metadata is available; exact scr
 
 ## Resume
 Fetch origin; checkout development-v8.2. Read this file and git log before continuing.
+
+## Checkpoint 2 — dynamic runtime and recovered gates
+- User supplied archive; script SHA-256 4198cfb9… and WPM fac0153a… match 8.1 exactly.
+- Recovered all 17 CreateDestructable placements and 13 event handlers into gate-evidence.json; extraction is reproducible.
+- Added separate occupancy grid, destructible fortifications, tower/building footprints, route invalidation, isolated 8.2 save namespace.
+- Added pooling allocation sites, architectural drawing, animated gates, destruction particles and optional diagnostics (initial smoke passed in Chromium).
+- Footprint rectangles and architectural artwork are reconstructed; source placements/operations are verified. Existing adapted campaign schedules gate events; this is not a full JASS interpreter.
+- Pending: full regression, lifecycle/pool checks, gate passage coverage, browser CI and publish.
