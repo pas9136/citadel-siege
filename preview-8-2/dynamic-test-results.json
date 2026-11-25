@@ -23,6 +23,17 @@
         "limit": 320
       }
     },
+    "endurance": {
+      "lanesReachKeep": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "simulatedBattleSeconds": 10,
+      "updateP95Ms": 2,
+      "updateMaxMs": 73.40000000002328
+    },
     "persistence": true,
     "saveIsolation": true,
     "diagnostics": true,

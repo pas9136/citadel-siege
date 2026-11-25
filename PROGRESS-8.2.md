@@ -42,3 +42,8 @@ Fetch origin; checkout development-v8.2. Read this file and git log before conti
 - Added styled mobile controls and original environmental details; documented verified vs reconstructed facts and adapted gate scheduling in preview-8-2/README.md.
 - Earlier releases verified byte-for-byte unchanged with git diff against baseline.
 - Remaining: final four-suite CI on both engines, public deploy and public smoke test.
+
+## Final verification additions
+- First GitHub Actions run 45536423192 passed Chromium and WebKit campaign/dynamic suites.
+- Added physical crossing and route assertions for every gate, four 60-second simulated lane-to-keep attacks and a 100-enemy, 600-update endurance check. Local lane attacks all damaged the keep; no stuck routes.
+- Final CI also runs the combat and progression-state suites. No further gameplay changes planned unless these reveal a defect.
