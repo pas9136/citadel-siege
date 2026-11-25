@@ -27,3 +27,11 @@ Fetch origin; checkout development-v8.2. Read this file and git log before conti
 - Added pooling allocation sites, architectural drawing, animated gates, destruction particles and optional diagnostics (initial smoke passed in Chromium).
 - Footprint rectangles and architectural artwork are reconstructed; source placements/operations are verified. Existing adapted campaign schedules gate events; this is not a full JASS interpreter.
 - Pending: full regression, lifecycle/pool checks, gate passage coverage, browser CI and publish.
+
+## Checkpoint 3 — regression fixes and browser CI
+- Chromium full campaign passed: 250 checks each at 844x390 and 390x844; zero WPM mismatches; save/reload and touch controls passed.
+- Dynamic suite passed: 85 assertions covering all 17 gate collision/replan transitions, tower/destructible collision release, pool reuse, construction, reload, save isolation, diagnostics, rotation and map controls.
+- Fixed repeated JASS temporary unit names by including source coordinates in persistent IDs.
+- Gate scheduling adaptation: demon gates open at wave 12 so flame objectives remain reachable in the retained 8.1 campaign.
+- Removed duplicate legacy structure art and kept terrain chunk shading independent of dynamic occupancy.
+- WebKit local dependencies missing; GitHub Actions installs both browser runtimes. Pending CI results and publication.

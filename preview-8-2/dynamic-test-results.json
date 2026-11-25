@@ -1,0 +1,32 @@
+[
+  {
+    "engine": "chromium",
+    "checks": 85,
+    "killedId": "u:-512:-8640",
+    "pools": {
+      "actors": {
+        "created": 20,
+        "reused": 17,
+        "free": 3,
+        "limit": 240
+      },
+      "projectiles": {
+        "created": 10,
+        "reused": 10,
+        "free": 10,
+        "limit": 240
+      },
+      "particles": {
+        "created": 48,
+        "reused": 96,
+        "free": 0,
+        "limit": 320
+      }
+    },
+    "persistence": true,
+    "saveIsolation": true,
+    "diagnostics": true,
+    "rotation": true,
+    "mapControls": true
+  }
+]

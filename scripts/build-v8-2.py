@@ -24,6 +24,12 @@ for array,pool in [('enemies','actorPool82'),('projectiles','shotPool82'),('host
 s=s.replace('projectiles.shift()', 'shotPool82.release(projectiles.shift())')
 s=s.replace('enemies=enemies.filter(e=>!e.dead)', 'enemies=enemies.filter(e=>{if(e.dead){actorPool82.release(e);return false}return true})')
 s=s.replace('drawWorldChunks(left,top,right,bottom);','drawWorldChunks(left,top,right,bottom);drawDynamic82(left,top,right,bottom);')
+s=s.replace("drawStructure(s.x,s.y,'keep')", "drawStructure(s.x,s.y,'shop')")
+a=s.index(' for(const p of referenceStructures)');b=s.index(' for(let row=',a);s=s[:a]+s[b:]
+# Terrain art must remain static; runtime obstacles have their own render layer.
+a=s.index('function terrainChunk(');b=s.index('function drawWorldChunks(',a)
+s=s[:a]+s[a:b].replace('blockedCell(', 'staticBlocked82(')+s[b:]
+s=s.replace('window.__citadelTest={', 'window.__citadelTest={dynamicCells82,staticBlocked82,fireProjectile,')
 s=s.replace('window.__citadelTest={', (p/'preview-8-2/dynamic.js').read_text()+'\n'+(p/'preview-8-2/art.js').read_text()+'\nwindow.__citadelTest={dynamic82:{objects:()=>objects82,refresh:refresh82,setGate:setGate82,damage:damageObject82,revision:()=>navRevision82,pools:()=>poolStats82(),serialize:serialize82},')
 s=s.replace('<script src="world-data.js"></script>', '<script src="world-data.js"></script>\n<script src="gates-data.js"></script>')
 (p/'preview-8-2/index.html').write_text(s)
