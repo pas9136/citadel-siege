@@ -1,0 +1,19 @@
+name: v17 quality
+on:
+  push:
+    branches: [main]
+    paths: ['preview-17/**', 'tests/v17-quality.mjs', '.github/workflows/v17-quality.yml']
+  workflow_dispatch:
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-save playwright@1.58.2
+      - run: npx playwright install --with-deps chromium webkit
+      - run: |
+          python3 -m http.server 8000 &
+          node tests/v17-quality.mjs
