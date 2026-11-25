@@ -1,0 +1,19 @@
+name: v9 beta smoke
+on:
+  push:
+    branches: [development-v9.0]
+  pull_request:
+    paths: ['preview-9-beta/**', 'tests/v9-beta.mjs', '.github/workflows/v9-beta.yml']
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-save playwright@1.58.2
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8000 &
+          node tests/v9-beta.mjs
