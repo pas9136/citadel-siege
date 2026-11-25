@@ -47,3 +47,4 @@ Fetch origin; checkout development-v8.2. Read this file and git log before conti
 - First GitHub Actions run 45536423192 passed Chromium and WebKit campaign/dynamic suites.
 - Added physical crossing and route assertions for every gate, four 60-second simulated lane-to-keep attacks and a 100-enemy, 600-update endurance check. Local lane attacks all damaged the keep; no stuck routes.
 - Final CI also runs the combat and progression-state suites. No further gameplay changes planned unless these reveal a defect.
+- Final mobile visual review moved Break structure below Origins Travel to avoid overlap; corrected the retained menu footer's release label to 8.2.

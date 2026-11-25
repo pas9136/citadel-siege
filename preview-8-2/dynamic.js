@@ -50,7 +50,7 @@ const enter82=enterArena;enterArena=function(id){const ok=enter82(id);if(ok){ref
 const leave82=leaveArena;leaveArena=function(won){const ok=leave82(won);if(ok){refresh82();placeActor(state.p,state.p)}return ok};
 const update82=update;update=function(dt){if(!state||state.mode!=='game'||state.paused||state.shop||state.inventoryOpen||state.talentsOpen)return;refresh82();const sealed=state.seals?.every(Boolean);update82(dt);if(!sealed&&state.seals?.every(Boolean))applyGateEvent82('Trig_Survival3Attack_Actions');refresh82();collectPools82();for(const o of objects82)if(o.kind==='gate')o.animation=Math.max(0,Math.min(1,o.animation+(o.open?1:-1)*dt*2));for(let i=particles.length-1;i>=0;i--){const p=particles[i];p.life-=dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=90*dt;if(p.life<=0)particlePool82.release(particles.splice(i,1)[0])}};
 // A nearby ruin can be attacked explicitly, without changing enemy targeting.
-const break82=document.createElement('button');break82.textContent='Break structure';break82.className='interactive';break82.style.cssText='position:fixed;left:12px;top:110px;z-index:6;min-height:44px;display:none';$('ui').appendChild(break82);
+const break82=document.createElement('button');break82.textContent='Break structure';break82.className='interactive';break82.style.cssText='position:fixed;left:12px;top:140px;z-index:6;min-height:44px;display:none';$('ui').appendChild(break82);
 break82.onclick=()=>{if(!activeOrigins())return;const o=objects82.find(o=>o.destructible&&o.hp>0&&dist(o.x,o.y,state.p.x,state.p.y)<state.p.range+30);if(o){damageObject82(o.id,heroStat('attack'));addEffect('slash',o.x,o.y,{r:30,duration:.2,color:'#ffd27c'})}};
 
 const command82=command;command=function(a,k){const ok=command82(a,k);if(ok)refresh82();return ok};

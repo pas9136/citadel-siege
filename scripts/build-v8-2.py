@@ -2,6 +2,7 @@
 from pathlib import Path
 p=Path(__file__).resolve().parent.parent
 s=(p/'preview-8-1/index.html').read_text().replace('v8.1.original-world:', 'v8.2.dynamic-world:').replace('8.1 — ORIGINAL WORLD','8.2 — LIVING FORTRESS')
+s=s.replace('ВЕРСИЯ 7.0 — HEROES AT WAR','ВЕРСИЯ 8.2 — LIVING FORTRESS')
 s=s.replace('schema:8,origins:', 'schema:8,dynamic82:serialize82(),origins:')
 # Dynamic occupancy is separate from the verified WPM bytes.
 s=s.replace('!!(pathFlags[(world.height-1-r)*world.width+c]&2)', '!!(pathFlags[(world.height-1-r)*world.width+c]&2)||!!dynamicCells82[r*world.width+c]')

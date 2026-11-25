@@ -1,7 +1,7 @@
 [
   {
     "engine": "chromium",
-    "checks": 87,
+    "checks": 138,
     "killedId": "u:-512:-8640",
     "pools": {
       "actors": {
@@ -32,7 +32,7 @@
       ],
       "simulatedBattleSeconds": 10,
       "updateP95Ms": 2,
-      "updateMaxMs": 73.40000000002328
+      "updateMaxMs": 65.90000000002328
     },
     "persistence": true,
     "saveIsolation": true,
