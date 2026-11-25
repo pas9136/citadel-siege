@@ -943,11 +943,11 @@ let timed91=[],souls91=0,revive91=0;
 const kit91=()=>kits91[active90].skills;
 const start91=createGame;
 createGame=function(h,save){timed91=[];souls91=save?.souls91||0;revive91=0;let n=save?.heroVariant90??chosen90;if(!kits91[n]||roster90[n][0]!==h)n=roster90.findIndex(r=>r[0]===h);heroDefs[h].skills=kits91[n].skills.slice(0,4).map(k=>[k.title,icons91[k.kind],k.cooldown]);start91(h,save);heroDefs[h].skills=kit91().slice(0,4).map(k=>[k.title,icons91[k.kind],k.cooldown]);state.p.cooldowns[4]=0;refreshSkills();updateUI()};
-const b91=$('skill3').cloneNode(true);b91.id='skill4';$('skill3').after(b91);b91.addEventListener('click',()=>skillCast(4));
+const b91=$('skill4');
 const refresh91=refreshSkills;refreshSkills=function(){refresh91();kit91().forEach((k,i)=>{let b=$('skill'+i);b.querySelector('.skill-name').textContent=k.title;b.querySelector('.skill-symbol').textContent=icons91[k.kind];b.querySelector('.skill-symbol').style.removeProperty('--rune');b.title=k.title+' · '+(passive91.has(k.kind)?'Пассивный':k.mana+' MP')})};
 const ui91=updateUI;updateUI=function(){ui91();if(!state||state.mode!=='game')return;kit91().forEach((k,i)=>{let b=$('skill'+i),v=state.p.cooldowns[i]||0,c=b.querySelector('.cool');c.classList.toggle('hidden',!passive91.has(k.kind)&&v<=0&&!(i===4&&state.p.level<5));c.textContent=passive91.has(k.kind)?'ПАСС':i===4&&state.p.level<5?'5 ур.':Math.ceil(v);b.classList.toggle('skill-locked',i===4&&state.p.level<5)})};
 const has91=k=>kit91().some(a=>a.kind===k);
-const damage91=damageEnemy;damageEnemy=function(e,d,c,t){if(!state||e.dead)return;let p=state.p;if(has91('crit')&&Math.random()<.22)d*=1.8;if(has91('souls'))d*=1+Math.min(souls91,100)*.012;if(has91('armorbreak'))d*=1.2;damage91(e,d,c,t);if(has91('leech'))p.hp=Math.min(p.maxHp,p.hp+d*.08);if(e.dead&&has91('souls'))souls91++};
+const damage91=damageEnemy;damageEnemy=function(e,d,c,t){if(!state||!e||e.dead)return;let p=state.p;if(has91('crit')&&Math.random()<.22)d*=1.8;if(has91('souls'))d*=1+Math.min(souls91,100)*.012;if(has91('armorbreak'))d*=1.2;damage91(e,d,c,t);if(has91('leech'))p.hp=Math.min(p.maxHp,p.hp+d*.08);if(e.dead&&has91('souls'))souls91++};
 const hit91=hitHero;hitHero=function(d){if(has91('evade')&&Math.random()<.2)return;if(has91('armor'))d*=.8;hit91(d);if(state.p.hp<=0&&has91('revive')&&revive91<=0){state.p.hp=state.p.maxHp*.5;state.p.respawn=0;revive91=90}};
 skillCast=function(i){if(!state||state.mode!=='game'||state.paused||state.shop||state.inventoryOpen||state.talentsOpen)return;const p=state.p,k=kit91()[i];if(!k||p.hp<=0||p.cooldowns[i]>0||passive91.has(k.kind))return;if(i===4&&p.level<5)return toast('Откроется на 5 уровне');if(p.mana<k.mana)return toast('Недостаточно маны');const t=nearest(p.x,p.y,480),x=t?.x??p.x,y=t?.y??p.y,a=heroStat('attack')*(1+(state.expansion.skills[i]||0)*.1),r=100+i*35;const area=(xx,yy,rr,d,status,sec)=>strikeArea(xx,yy,rr,d,status,sec,'magic');p.mana-=k.mana;p.cooldowns[i]=k.cooldown;markAttack(p);
 switch(k.kind){
@@ -963,7 +963,7 @@ case 'dash':moveActor(p,Math.cos(p.face)*140,Math.sin(p.face)*140);area(p.x,p.y,
 case 'haste':p.dashBuff=8;break;
 case 'form':p.shield=10;p.dashBuff=10;timed91.push({kind:'aura',t:10,tick:0,a:a*.9,r:145});break;
 case 'drain':if(t){damageEnemy(t,a*3,true);p.hp=Math.min(p.maxHp,p.hp+a*1.5)}break;
-case 'execute':if(t)damageEnemy(t,a*(t.hp<t.maxHp*.3?8:3),true);break;
+case 'execute':if(t)damageEnemy(t,a*(t.hp<(t.maxHp||types[t.kind].hp)*.3?8:3),true);break;
 case 'poison':if(t)timed91.push({kind:'poison',target:t,t:6,tick:0,a:a*.65});break;
 case 'field':timed91.push({kind:'field',x,y,r,t:6,tick:0,a:a*.9});break;
 case 'aura':timed91.push({kind:'aura',r,t:7,tick:0,a:a*.8});break;
