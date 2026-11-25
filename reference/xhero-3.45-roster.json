@@ -1,0 +1,333 @@
+{
+  "source": "X HERO SIEGE 3.45v RUS.w3x",
+  "evidence": "Scripts\\war3map.j: udg_integers12; war3map.w3u: uhab, unam, upro",
+  "status": "Extracted reference identifiers only; not implemented combat. Missing names are not inferred.",
+  "heroes": [
+    {
+      "slot": 1,
+      "id": "Edem",
+      "name": "Эссермин",
+      "skills": [
+        "A0BB",
+        "AEim",
+        "A00K",
+        "AEev",
+        "AEme"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 2,
+      "id": "Ewar",
+      "name": "Мэв",
+      "skills": [
+        "A08H",
+        "AEfk",
+        "AEsh",
+        "A00N",
+        "A05Z"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 3,
+      "id": "Hpal",
+      "name": "Утер",
+      "skills": [
+        "A06G",
+        "A07Z",
+        "A00A",
+        "A097",
+        "AHad"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 4,
+      "id": "Hamg",
+      "name": "Раминус",
+      "skills": [
+        "A06H",
+        "A02N",
+        "A02H",
+        "A00M",
+        "A07U"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 5,
+      "id": "Hmkg",
+      "name": "Магни Бронзобород",
+      "skills": [
+        "A089",
+        "AHtc",
+        "AHtb",
+        "AHbh",
+        "AHav"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 6,
+      "id": "Hblm",
+      "name": "Кель",
+      "skills": [
+        "A00Q",
+        "A06O",
+        "AHfs",
+        "AHpx",
+        "A00I"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 7,
+      "id": "Obla",
+      "name": "Дзюбей",
+      "skills": [
+        "A0BT",
+        "AOwk",
+        "AOcr",
+        "A074",
+        "A08M"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 8,
+      "id": "Npbm",
+      "name": "Райво",
+      "skills": [
+        "A00L",
+        "Acdh",
+        "A086",
+        "A088",
+        "ANdb"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 9,
+      "id": "Emoo",
+      "name": "Тиренд",
+      "skills": [
+        "Acri",
+        "A036",
+        "ANfa",
+        "A033",
+        "A031"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 10,
+      "id": "Oshd",
+      "name": "Рохан",
+      "skills": [
+        "A049",
+        "A042",
+        "ANhx",
+        "Arsw",
+        "A044"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 11,
+      "id": "Ogrh",
+      "name": "Слардар",
+      "skills": [
+        "A06Y",
+        "A072",
+        "A08Q",
+        "A071",
+        "A099"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 12,
+      "id": "Hvsh",
+      "name": null,
+      "skills": [
+        "A09M",
+        "A0A8",
+        "A09N",
+        "A09O",
+        "A09P"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 13,
+      "id": "H007",
+      "name": "не придумано",
+      "skills": [],
+      "implemented": false
+    },
+    {
+      "slot": 14,
+      "id": "H000",
+      "name": "не придумано",
+      "skills": [],
+      "implemented": false
+    },
+    {
+      "slot": 15,
+      "id": "Harf",
+      "name": "Тарс",
+      "skills": [
+        "A08L",
+        "A07M",
+        "A084",
+        "A07D",
+        "A07E"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 16,
+      "id": "H002",
+      "name": "Джек",
+      "skills": [
+        "A047",
+        "A037",
+        "A013",
+        "A03D",
+        "A03C"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 17,
+      "id": "Otch",
+      "name": "Кэрн",
+      "skills": [
+        "A00P",
+        "AOsh",
+        "AOws",
+        "A00W",
+        "AOae"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 18,
+      "id": "Hvwd",
+      "name": "Сильвана",
+      "skills": [
+        "A092",
+        "AHfa",
+        "A000",
+        "A015",
+        "AEar"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 19,
+      "id": "Nbst",
+      "name": "Рексар",
+      "skills": [
+        "A06S",
+        "ANsw",
+        "A06W",
+        "A06X",
+        "AEah"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 20,
+      "id": "H009",
+      "name": "Гроза",
+      "skills": [
+        "A03H",
+        "A03I",
+        "A07Q",
+        "AOcl",
+        "ANfl"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 21,
+      "id": "Hjai",
+      "name": "Архимаг",
+      "skills": [
+        "ANms",
+        "AHbz",
+        "A009",
+        "AHwe",
+        "A003"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 22,
+      "id": "Nklj",
+      "name": "Повелитель Огня",
+      "skills": [
+        "ANlm",
+        "ANrf",
+        "ANso",
+        "A03K",
+        "A0A1"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 23,
+      "id": "Ucrl",
+      "name": "Ануб'арак",
+      "skills": [
+        "AUim",
+        "AUts",
+        "AUcb",
+        "AUls",
+        "A020"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 24,
+      "id": "Ulic",
+      "name": "Кел'Тузед",
+      "skills": [
+        "AUfn",
+        "A062",
+        "A04C",
+        "A035",
+        "AUfu"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 25,
+      "id": "N00W",
+      "name": "Nevermore",
+      "skills": [
+        "A08Z",
+        "A07T",
+        "A08R",
+        "A01R",
+        "A087"
+      ],
+      "implemented": false
+    },
+    {
+      "slot": 26,
+      "id": "Udre",
+      "name": "Тикондрус",
+      "skills": [
+        "AUcs",
+        "A01P",
+        "A00H",
+        "AUin",
+        "AUav"
+      ],
+      "implemented": false
+    }
+  ]
+}
