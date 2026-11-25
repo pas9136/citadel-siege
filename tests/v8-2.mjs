@@ -1,0 +1,30 @@
+import {chromium,webkit} from 'playwright';
+import fs from 'node:fs';
+const reports=[];
+for(const engine of process.env.CHROMIUM_ONLY?[chromium]:[chromium,webkit]){
+ let browser;try{browser=await engine.launch()}catch(e){if(process.env.CI)throw e;reports.push({engine:engine.name(),unavailable:e.message});continue}
+ for(const viewport of [{width:844,height:390},{width:390,height:844}]){
+ const page=await browser.newPage({viewport,isMobile:true,hasTouch:true});const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(process.env.V82_URL||'http://localhost:8765/preview-8-2/');
+ const result=await page.evaluate(()=>{const t=__citadelTest,checks=[];const check=(v,m)=>{if(!v)throw Error(m);checks.push(m)};
+ for(let difficulty=0;difficulty<4;difficulty++){document.getElementById('difficulty8').value=difficulty;t.start();check(t.state().origins.difficulty===difficulty,'difficulty '+difficulty)}t.start();const s=t.state(),p=s.p;p.hp=p.maxHp=1e8;s.base.hp=s.base.maxHp=1e8;
+ let mismatch=0;for(let row=0;row<t.world.height;row++)for(let col=0;col<t.world.width;col++){const source=(t.world.height-1-row)*t.world.width+col;const point=t.cellPoint(row*t.world.width+col);if(!t.staticBlocked82(col,row)!==!(t.pathFlags[source]&2))mismatch++}check(mismatch===0,'344064 pathing cell centers match source');
+ let testedWalls=0;for(let i=0;i<t.world.width*t.world.height&&testedWalls<100;i++){const a=t.cellPoint(i);if(!t.terrainWalkable(a.x,a.y))continue;const q={x:a.x+8,y:a.y};if(t.terrainWalkable(q.x,q.y))continue;const actor={...a};t.moveActor(actor,8,0,0);check(t.terrainWalkable(actor.x,actor.y),'wall collision');testedWalls++}check(testedWalls===100,'100 wall boundaries');for(const q of t.spawnPoints){const route=t.findPath(q,{x:0,y:0});check(route.length>0,'attack corridor connected');let a={...q};for(const step of route){check(t.clearSegment(a,step),'attack route clear');a=step}}
+ for(const shop of t.shops.slice(0,4)){let found=false;for(const [x,y] of [[0,65],[0,-65],[65,0],[-65,0]]){const q={x:shop.x+x,y:shop.y+y};if(!t.walkable(q.x,q.y))continue;const route=t.findPath(p,q);if(!route.length)continue;for(const step of route){check(t.clearSegment(p,step),'shop corridor');t.moveActor(p,step.x-p.x,step.y-p.y)}t.openShop();check(s.shop,'four-direction shop '+shop.name);document.getElementById('closeShop').click();found=true;break}check(found,'shop reachable '+shop.name)}
+ for(const a of t.origins.arenas){check(t.origins.enter(a.id),'enter '+a.id);check(t.walkable(p.x,p.y),'valid arena arrival '+a.id);const boss=t.enemies()[0];check(t.findPath(p,boss).length>0,'arena connected '+a.id);for(const e of [...t.enemies()])t.damageEnemy(e,1e10);t.update(.1);check(s.origins.completed.includes(a.id),'complete '+a.id)}
+ t.origins.travel('castle');
+ for(let wave=1;wave<=12;wave++){t.wave();check(s.wave===wave,'wave '+wave);const lanes=new Set();for(let n=0;n<1000&&!s.preparing;n++){t.update(.1);for(const e of [...t.enemies()]){lanes.add(e.lane);t.damageEnemy(e,1e10)}}check(s.preparing,'wave clear');check(lanes.size===1&&lanes.has([0,2,1,3][(wave-1)%4]),'direction rotation')}
+ for(const tower of t.towers()){check(t.findPath(p,{x:tower.x,y:tower.y+45}).length>0,'flame tower reachable');p.x=tower.x;p.y=tower.y+45;t.selectTower(tower.id);p.attack=1e6;t.playerAuto();check(tower.hp===0,'destroy flame tower')}
+ t.update(.1);check(s.prep===30,'final countdown');t.update(29);check(s.wave===12,'final wait');t.update(1.1);check(s.wave===13,'final wave');for(let i=0;i<1000&&s.stage===4;i++){t.update(.1);for(const e of [...t.enemies()])if(!e.major)t.damageEnemy(e,1e10)}check(s.stage===3,'zone 4 to 3');
+ check(t.findPath(p,t.enemies().find(e=>e.major)).length>0,'central boss accessible');t.damageEnemy(t.enemies().find(e=>e.major),1e10);t.update(.1);check(s.stage===2,'zone 3 to 2');
+ const upper=t.shops.at(-1),upperRoute=t.findPath(p,{x:upper.x,y:upper.y+65});check(upperRoute.length>0,'upper shop connected');for(const step of upperRoute)t.moveActor(p,step.x-p.x,step.y-p.y);t.openShop();check(s.shop,'upper shop accessible');document.getElementById('closeShop').click();for(const name of ['udg_rect39','udg_rect41']){const q=t.regionPoint(name),route=t.findPath(p,q);check(route.length>0,'perimeter objective connected');for(const step of route)t.moveActor(p,step.x-p.x,step.y-p.y);t.update(.1)}check(s.seals.every(Boolean),'both seals');check(t.origins.travel('final'),'final teleport');check(s.stage===1,'zone 2 to 1');check(t.findPath(p,t.enemies().find(e=>e.major)).length>0,'final boss accessible');t.damageEnemy(t.enemies().find(e=>e.major),1e10);t.update(.1);check(s.mode!=='game','campaign complete');
+ t.start();for(let i=0;i<100;i++)t.spawn('grunt');check(t.enemies().length===100,'100-enemy battle');t.update(.1);t.frame();t.writeSave();
+ return {checks:checks.length,mismatch};});
+ const position=await page.evaluate(()=>{__citadelTest.writeSave();return {x:__citadelTest.state().p.x,y:__citadelTest.state().p.y}});
+ await page.reload();await page.locator('#continueGame').click();const restored=await page.evaluate(()=>({x:__citadelTest.state().p.x,y:__citadelTest.state().p.y}));if(JSON.stringify(position)!==JSON.stringify(restored))throw Error('save restore');
+ const joy=page.locator('#joystick'),box=await joy.boundingBox();await joy.dispatchEvent('pointerdown',{pointerId:4,isPrimary:true,clientX:box.x+box.width*.8,clientY:box.y+box.height*.5});await page.evaluate(()=>__citadelTest.update(.3));await joy.dispatchEvent('pointerup',{pointerId:4});const moved=await page.evaluate(()=>__citadelTest.state().p.x);if(moved===restored.x)throw Error('touch joystick');
+ result.saveRestore=true;result.touchControls=true;
+ if(errors.length)throw Error(errors.join('\n'));
+ await page.screenshot({path:`preview-8-2/gameplay-${viewport.width}.png`});reports.push({engine:engine.name(),viewport,...result});await page.close();}
+ await browser.close();
+}
+fs.writeFileSync('preview-8-2/test-results.json',JSON.stringify(reports,null,2));console.log(JSON.stringify(reports,null,2));

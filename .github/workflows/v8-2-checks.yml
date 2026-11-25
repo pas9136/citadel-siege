@@ -1,0 +1,32 @@
+name: Living Fortress 8.2 checks
+on:
+  push:
+    branches: [development-v8.2, main]
+    paths: ['preview-8-2/**', 'scripts/*8-2*', 'tests/v8-2*', '.github/workflows/v8-2-checks.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browsers:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium webkit
+      - run: python3 scripts/build-v8-2.py && git diff --exit-code -- preview-8-2/index.html
+      - run: python3 -m http.server 8765 > /tmp/server.log 2>&1 &
+      - run: node tests/v8-2.mjs
+      - run: node tests/v8-2-dynamic.mjs
+      - run: node tests/v8-2-combat.mjs && node tests/v8-2-state.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v8-2-results
+          path: |
+            preview-8-2/test-results.json
+            preview-8-2/dynamic-test-results.json
+            preview-8-2/gameplay-*.png

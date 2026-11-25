@@ -1,0 +1,43 @@
+[
+  {
+    "engine": "chromium",
+    "checks": 138,
+    "killedId": "u:-512:-8640",
+    "pools": {
+      "actors": {
+        "created": 20,
+        "reused": 17,
+        "free": 0,
+        "limit": 240
+      },
+      "projectiles": {
+        "created": 10,
+        "reused": 11,
+        "free": 0,
+        "limit": 240
+      },
+      "particles": {
+        "created": 48,
+        "reused": 96,
+        "free": 0,
+        "limit": 320
+      }
+    },
+    "endurance": {
+      "lanesReachKeep": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "simulatedBattleSeconds": 10,
+      "updateP95Ms": 2,
+      "updateMaxMs": 65.90000000002328
+    },
+    "persistence": true,
+    "saveIsolation": true,
+    "diagnostics": true,
+    "rotation": true,
+    "mapControls": true
+  }
+]

@@ -1,0 +1,24 @@
+[
+  {
+    "engine": "chromium",
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "checks": 250,
+    "mismatch": 0,
+    "saveRestore": true,
+    "touchControls": true
+  },
+  {
+    "engine": "chromium",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "checks": 250,
+    "mismatch": 0,
+    "saveRestore": true,
+    "touchControls": true
+  }
+]
