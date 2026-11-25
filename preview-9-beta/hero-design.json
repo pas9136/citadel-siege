@@ -1,0 +1,965 @@
+{
+  "status": "Proposed adaptations, not verified original ability definitions. All effects require engine integration and tests.",
+  "heroes": [
+    {
+      "name": "Эссермин",
+      "skills": [
+        {
+          "title": "Ядовитый бросок",
+          "kind": "poison",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Огненная аура",
+          "kind": "aura",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Негативная энергия",
+          "kind": "drain",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Изворотливость",
+          "kind": "evade",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Демоническая форма",
+          "kind": "form",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Мэв",
+      "skills": [
+        {
+          "title": "Талант убийцы",
+          "kind": "crit",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Веер клинков",
+          "kind": "burst",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Теневой удар",
+          "kind": "poison",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Скачок",
+          "kind": "dash",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Последний удар",
+          "kind": "execute",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Утер",
+      "skills": [
+        {
+          "title": "Ослепление",
+          "kind": "stun",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Вспышка света",
+          "kind": "heal",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Святой удар",
+          "kind": "bolt",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Эгида света",
+          "kind": "shield",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Святая аура",
+          "kind": "armor",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Раминус",
+      "skills": [
+        {
+          "title": "Ледяной поток",
+          "kind": "slow",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Водный дух",
+          "kind": "summon",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Магический заряд",
+          "kind": "bolt",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Восстановление маны",
+          "kind": "mana",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Буря",
+          "kind": "field",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Магни Бронзобород",
+      "skills": [
+        {
+          "title": "Молот",
+          "kind": "bolt",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Удар грома",
+          "kind": "stun",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Грозовой бросок",
+          "kind": "chain",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Оглушающий удар",
+          "kind": "crit",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Аватар",
+          "kind": "form",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Кель",
+      "skills": [
+        {
+          "title": "Кольцо огня",
+          "kind": "aura",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Огненный шар",
+          "kind": "bolt",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Огненный столб",
+          "kind": "field",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Феникс",
+          "kind": "summon",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Пламя возрождения",
+          "kind": "heal",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Дзюбей",
+      "skills": [
+        {
+          "title": "Рассечение",
+          "kind": "burst",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Шаг ветра",
+          "kind": "dash",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Критический удар",
+          "kind": "crit",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Зеркальный образ",
+          "kind": "summon",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Вихрь клинков",
+          "kind": "aura",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Райво",
+      "skills": [
+        {
+          "title": "Пьяное пламя",
+          "kind": "field",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Хмельное облако",
+          "kind": "slow",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Уклонение",
+          "kind": "evade",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Удар бочки",
+          "kind": "stun",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Стихийные духи",
+          "kind": "summon",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Тиренд",
+      "skills": [
+        {
+          "title": "Сова",
+          "kind": "summon",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Лунный выстрел",
+          "kind": "bolt",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Звездопад",
+          "kind": "field",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Лунная защита",
+          "kind": "shield",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Аура меткости",
+          "kind": "crit",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Рохан",
+      "skills": [
+        {
+          "title": "Лечение",
+          "kind": "heal",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Змеиный страж",
+          "kind": "summon",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Проклятие",
+          "kind": "slow",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Змеиный круг",
+          "kind": "field",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Духовная защита",
+          "kind": "shield",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Слардар",
+      "skills": [
+        {
+          "title": "Ярость нага",
+          "kind": "haste",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Удар хвостом",
+          "kind": "stun",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Сила моря",
+          "kind": "burst",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Водоворот",
+          "kind": "field",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Морская броня",
+          "kind": "armor",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Морская ведьма",
+      "skills": [
+        {
+          "title": "Ледяная стрела",
+          "kind": "slow",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Молния",
+          "kind": "chain",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Водяной щит",
+          "kind": "shield",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Прилив",
+          "kind": "burst",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Шторм",
+          "kind": "field",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Тарс",
+      "skills": [
+        {
+          "title": "Удар кулаком",
+          "kind": "bolt",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Взрыв силы",
+          "kind": "burst",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Рывок",
+          "kind": "dash",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Концентрация",
+          "kind": "mana",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Конечная форма",
+          "kind": "form",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Джек",
+      "skills": [
+        {
+          "title": "Кислота",
+          "kind": "poison",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Залп ракет",
+          "kind": "chain",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Тяжёлая боеголовка",
+          "kind": "field",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Клон",
+          "kind": "summon",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Ремонт",
+          "kind": "heal",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Кэрн",
+      "skills": [
+        {
+          "title": "Боевой топот",
+          "kind": "stun",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Ударная волна",
+          "kind": "burst",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Выносливость",
+          "kind": "armor",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Ярость",
+          "kind": "haste",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Возрождение",
+          "kind": "revive",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Сильвана",
+      "skills": [
+        {
+          "title": "Мощный выстрел",
+          "kind": "bolt",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Критический выстрел",
+          "kind": "crit",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Взрывные стрелы",
+          "kind": "burst",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Тёмная стрела",
+          "kind": "drain",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Град стрел",
+          "kind": "field",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Рексар",
+      "skills": [
+        {
+          "title": "Звериная ярость",
+          "kind": "haste",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Медведь",
+          "kind": "summon",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Волки",
+          "kind": "summon",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Боевой клич",
+          "kind": "heal",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Звериный натиск",
+          "kind": "burst",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Гроза",
+      "skills": [
+        {
+          "title": "Разряд",
+          "kind": "bolt",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Грозовой щит",
+          "kind": "shield",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Электрическое поле",
+          "kind": "field",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Цепная молния",
+          "kind": "chain",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Грозовой поток",
+          "kind": "aura",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Архимаг",
+      "skills": [
+        {
+          "title": "Магический поток",
+          "kind": "mana",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Метель",
+          "kind": "field",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Чародейский удар",
+          "kind": "bolt",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Элементаль",
+          "kind": "summon",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Массовый перенос",
+          "kind": "dash",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Повелитель Огня",
+      "skills": [
+        {
+          "title": "Лавовый дух",
+          "kind": "summon",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Огненный дождь",
+          "kind": "field",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Испепеление",
+          "kind": "poison",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Вулкан",
+          "kind": "burst",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Огненная форма",
+          "kind": "form",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Ануб'арак",
+      "skills": [
+        {
+          "title": "Пронзание",
+          "kind": "stun",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Шипастый панцирь",
+          "kind": "armor",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Жуки",
+          "kind": "summon",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Рой саранчи",
+          "kind": "drain",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Подземный удар",
+          "kind": "burst",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Кел'Тузед",
+      "skills": [
+        {
+          "title": "Ледяная нова",
+          "kind": "slow",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Ледяная броня",
+          "kind": "shield",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Тёмный ритуал",
+          "kind": "mana",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Ледяной взрыв",
+          "kind": "bolt",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Смерть и разложение",
+          "kind": "field",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Nevermore",
+      "skills": [
+        {
+          "title": "Поглощение душ",
+          "kind": "souls",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Лик смерти",
+          "kind": "armorbreak",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Ближний Shadowraze",
+          "kind": "burst",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Дальний Shadowraze",
+          "kind": "field",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Реквием душ",
+          "kind": "aura",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    },
+    {
+      "name": "Тикондрус",
+      "skills": [
+        {
+          "title": "Рой",
+          "kind": "burst",
+          "slot": 0,
+          "cooldown": 6,
+          "mana": 15
+        },
+        {
+          "title": "Сон",
+          "kind": "stun",
+          "slot": 1,
+          "cooldown": 10,
+          "mana": 22
+        },
+        {
+          "title": "Вампиризм",
+          "kind": "leech",
+          "slot": 2,
+          "cooldown": 15,
+          "mana": 30
+        },
+        {
+          "title": "Инфернал",
+          "kind": "summon",
+          "slot": 3,
+          "cooldown": 22,
+          "mana": 40
+        },
+        {
+          "title": "Тёмное восстановление",
+          "kind": "heal",
+          "slot": 4,
+          "cooldown": 45,
+          "mana": 65
+        }
+      ]
+    }
+  ]
+}
