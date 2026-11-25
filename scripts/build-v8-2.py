@@ -29,7 +29,8 @@ a=s.index(' for(const p of referenceStructures)');b=s.index(' for(let row=',a);s
 # Terrain art must remain static; runtime obstacles have their own render layer.
 a=s.index('function terrainChunk(');b=s.index('function drawWorldChunks(',a)
 s=s[:a]+s[a:b].replace('blockedCell(', 'staticBlocked82(')+s[b:]
-s=s.replace('window.__citadelTest={', 'window.__citadelTest={dynamicCells82,staticBlocked82,fireProjectile,')
+s=s.replace("ctx.fillStyle='#8c928366';ctx.fillRect(p.x-3,p.y-5,6,10)", "drawEnvironment82(p.x,p.y)")
+s=s.replace('window.__citadelTest={', 'window.__citadelTest={dynamicCells82,staticBlocked82,fireProjectile,shots82:()=>projectiles,')
 s=s.replace('window.__citadelTest={', (p/'preview-8-2/dynamic.js').read_text()+'\n'+(p/'preview-8-2/art.js').read_text()+'\nwindow.__citadelTest={dynamic82:{objects:()=>objects82,refresh:refresh82,setGate:setGate82,damage:damageObject82,revision:()=>navRevision82,pools:()=>poolStats82(),serialize:serialize82},')
 s=s.replace('<script src="world-data.js"></script>', '<script src="world-data.js"></script>\n<script src="gates-data.js"></script>')
 (p/'preview-8-2/index.html').write_text(s)

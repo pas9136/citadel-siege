@@ -21,6 +21,7 @@ jobs:
       - run: python3 -m http.server 8765 > /tmp/server.log 2>&1 &
       - run: node tests/v8-2.mjs
       - run: node tests/v8-2-dynamic.mjs
+      - run: node tests/v8-2-combat.mjs && node tests/v8-2-state.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

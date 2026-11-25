@@ -2,10 +2,12 @@
 // Dimensions are original gameplay reconstructions, not Warcraft pathing textures.
 class Pool82 {
  constructor(limit){this.limit=limit;this.free=[];this.owned=new WeakSet();this.available=new WeakSet();this.live=new Set();this.created=0;this.reused=0}
- take(values){let o=this.free.pop();if(o){this.available.delete(o);this.reused++}else{o={};this.created++;this.owned.add(o)}for(const k of Object.keys(o))delete o[k];Object.assign(o,values);this.live.add(o);return o}
+ take(values){let o=this.free.pop();if(o){this.available.delete(o);this.reused++}else{o={};this.created++;this.owned.add(o)}for(const k of Object.keys(o))delete o[k];Object.assign(o,values);if(this===shotPool82)launchShot82(o);this.live.add(o);return o}
  release(o){if(!o||!this.owned.has(o)||this.available.has(o))return;this.live.delete(o);if(typeof visualPose!=='undefined')visualPose.delete(o);if(this.free.length<this.limit){this.available.add(o);this.free.push(o)}}
 }
 const actorPool82=new Pool82(240),shotPool82=new Pool82(240),particlePool82=new Pool82(320);
+// Launch bolts outside their emitting keep/tower, without bypassing unrelated walls.
+function launchShot82(q){if(!state)return;const emitter=[{x:0,y:0,w:64,h:56},...enemyTowers.map(t=>({...t,w:36,h:36}))].find(o=>rectHit82(o,q.x,q.y,2));if(!emitter)return;const speed=Math.hypot(q.vx,q.vy);if(!speed)return;for(let d=0;d<100&&rectHit82(emitter,q.x,q.y,4);d+=2){q.x+=q.vx/speed*2;q.y+=q.vy/speed*2}}
 function poolStats82(){return Object.fromEntries(Object.entries({actors:actorPool82,projectiles:shotPool82,particles:particlePool82}).map(([k,p])=>[k,{created:p.created,reused:p.reused,free:p.free.length,limit:p.limit}]))}
 function staticBlocked82(c,r){return c<0||r<0||c>=world.width||r>=world.height||!!(pathFlags[(world.height-1-r)*world.width+c]&2)}
 function collectPools82(){const actors=new Set([...enemies,...(arenaReturn?.enemies||[])]),shots=new Set([...projectiles,...hostileShots]),fx=new Set(particles);for(const [p,active] of [[actorPool82,actors],[shotPool82,shots],[particlePool82,fx]])for(const o of p.live)if(!active.has(o))p.release(o)}
@@ -32,7 +34,9 @@ function refresh82(force=false){
  dynamicCells82.fill(0);
  for(const o of [...objects82,...extra])if(o.solid){const c0=Math.max(0,Math.floor((o.x-o.w/2-worldRect.left)/8)),c1=Math.min(world.width-1,Math.ceil((o.x+o.w/2-worldRect.left)/8)-1),r0=Math.max(0,Math.floor((o.y-o.h/2-worldRect.top)/8)),r1=Math.min(world.height-1,Math.ceil((o.y+o.h/2-worldRect.top)/8)-1);for(let y=r0;y<=r1;y++)for(let x=c0;x<=c1;x++)dynamicCells82[y*world.width+x]++}
  navRevision82++;clearanceCache.clear();flowCache.clear();assaultRoutes.clear();
- for(const e of enemies){if(e.dead)continue;const goal=e.campId!==undefined?(e.major||e.arenaBoss?state.p:{x:e.homeX,y:e.homeY}):{x:0,y:0};e.path=findPath(e,goal,e.size);e.routeClock=0;e.pathIndex=0}
+ if(state.p&&!terrainWalkable(state.p.x,state.p.y,HERO_RADIUS))placeActor(state.p,state.p);
+ for(const e of enemies){if(e.dead)continue;if(!terrainWalkable(e.x,e.y,e.size))placeActor(e,e,e.size);const goal=e.campId!==undefined?(e.major||e.arenaBoss?state.p:{x:e.homeX,y:e.homeY}):{x:0,y:0};e.path=findPath(e,goal,e.size);e.routeClock=0;e.pathIndex=0}
+ for(const a of state.expansion?.army||[]){a.path=[];a.routeClock=0;if(a.hp>0&&!terrainWalkable(a.x,a.y,14))placeActor(a,a,14)}
  if(moveDestination)movePath=findPath(state.p,moveDestination);
 }
 function setGate82(id,open){const g=objects82.find(o=>o.id===id&&o.kind==='gate');if(!g)return false;gateOverrides82[id]=!!open;refresh82();writeSave();return true}

@@ -35,3 +35,10 @@ Fetch origin; checkout development-v8.2. Read this file and git log before conti
 - Gate scheduling adaptation: demon gates open at wave 12 so flame objectives remain reachable in the retained 8.1 campaign.
 - Removed duplicate legacy structure art and kept terrain chunk shading independent of dynamic occupancy.
 - WebKit local dependencies missing; GitHub Actions installs both browser runtimes. Pending CI results and publication.
+
+## Checkpoint 4 — combat preservation and release preparation
+- Chromium: all 15 hero abilities, upgrades, mana/save restoration, 12 enemy types, both multi-phase bosses, hazards, recipes, equipment and 100-enemy combat passed; 15 state checks passed.
+- Fixed projectiles colliding with their own emitting keep/tower; gate closure resolves overlapping actors to safe cells.
+- Added styled mobile controls and original environmental details; documented verified vs reconstructed facts and adapted gate scheduling in preview-8-2/README.md.
+- Earlier releases verified byte-for-byte unchanged with git diff against baseline.
+- Remaining: final four-suite CI on both engines, public deploy and public smoke test.

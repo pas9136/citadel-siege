@@ -7,6 +7,7 @@ for(const engine of process.env.CHROMIUM_ONLY?[chromium]:[chromium,webkit]){
  const browser=await engine.launch();const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(process.env.V82_URL||'http://localhost:8765/preview-8-2/');
  const result=await page.evaluate(()=>{
  const t=__citadelTest,checks=[];function check(ok,msg){if(!ok)throw Error(msg);checks.push(msg)}t.start();const s=t.state();s.p.hp=s.p.maxHp=s.base.hp=s.base.maxHp=1e9;
+ t.fireProjectile(0,0,{x:0,y:300,id:999},1);check(t.walkable(t.shots82().at(-1).x,t.shots82().at(-1).y,2),'keep bolts launch outside emitting footprint');
  const original=t.pathFlags.slice();check(t.dynamic82.objects().filter(o=>o.kind==='gate').length===17,'all 17 script objects present');
  for(const g of t.dynamic82.objects().filter(o=>o.kind==='gate')){
   t.dynamic82.setGate(g.id,false);let rev=t.dynamic82.revision();check(!t.walkable(g.x,g.y,0),g.id+' closed collision');const closed=t.dynamicCells82.reduce((a,b)=>a+b,0);t.spawn('grunt');const e=t.enemies().at(-1);e.path=[{x:123456,y:123456}];
@@ -15,6 +16,8 @@ for(const engine of process.env.CHROMIUM_ONLY?[chromium]:[chromium,webkit]){
  check(original.every((v,i)=>v===t.pathFlags[i]),'gate cycles leave original WPM unchanged');
  const tower=t.towers()[0];check(!t.walkable(tower.x,tower.y,0),'live tower footprint');let rev=t.dynamic82.revision();t.damageTower(tower,1e9);check(t.dynamic82.revision()>rev,'tower destruction invalidates routes synchronously');check(t.walkable(tower.x,tower.y,0),'tower rubble traversable');
  const o=t.dynamic82.objects().find(o=>o.destructible&&!t.staticBlocked82(Math.floor((o.x-t.worldRect.left)/8),Math.floor((o.y-t.worldRect.top)/8)));check(!!o,'destructible on static floor');check(!t.walkable(o.x,o.y,0),'fortress footprint');t.dynamic82.damage(o.id,1e9);check(t.walkable(o.x,o.y,0),'destroyed fortress releases collision');
+ // A closing gate must not trap an actor inside its newly occupied footprint.
+ const g=t.dynamic82.objects().find(o=>o.kind==='gate'&&t.walkable(o.x,o.y,18));if(g){s.p.x=g.x;s.p.y=g.y;t.dynamic82.setGate(g.id,false);check(t.walkable(s.p.x,s.p.y,18),'gate closure safely relocates overlapping hero');t.dynamic82.setGate(g.id,true)}
  const killedId=o.id;for(const e of [...t.enemies()])t.damageEnemy(e,1e9);t.update(.1);const before=t.dynamic82.pools().actors.reused;for(let i=0;i<20;i++)t.spawn('grunt');check(t.dynamic82.pools().actors.reused>before,'actor pool reuses reclaimed objects');check(t.enemies().every(e=>!e.dead&&!e.major&&!e.arenaBoss),'pooled actors clear prior state');
  for(let i=0;i<10;i++)t.fireProjectile(s.p.x,s.p.y,t.enemies()[0],1);for(let i=0;i<30;i++)t.update(.1);for(let i=0;i<10;i++)t.fireProjectile(s.p.x,s.p.y,t.enemies()[0],1);check(t.dynamic82.pools().projectiles.reused>0,'projectile pool reuse');
  const objects=t.dynamic82.objects().filter(o=>o.destructible&&o.hp>0);for(const x of objects.slice(0,2))t.dynamic82.damage(x.id,1e9);for(let i=0;i<20;i++)t.update(.1);for(const x of objects.slice(2,4))t.dynamic82.damage(x.id,1e9);check(t.dynamic82.pools().particles.reused>0,'particle pool reuse');

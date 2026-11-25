@@ -1,19 +1,19 @@
 [
   {
     "engine": "chromium",
-    "checks": 85,
+    "checks": 87,
     "killedId": "u:-512:-8640",
     "pools": {
       "actors": {
         "created": 20,
         "reused": 17,
-        "free": 3,
+        "free": 0,
         "limit": 240
       },
       "projectiles": {
         "created": 10,
-        "reused": 10,
-        "free": 10,
+        "reused": 11,
+        "free": 0,
         "limit": 240
       },
       "particles": {
